@@ -1,0 +1,29 @@
+@startuml AvaliarAsset
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Comprador]|
+start
+:Requisitar Detalhes do Asset;
+|#Cyan|[Sistema]|
+:DetalhesAsset; <<task>>
+|#white|[Comprador]|
+:Selecionar "Avaliar";
+|#Cyan|[Sistema]|
+:Avaliacao; <<task>>
+|#white|[Comprador]|
+:Preencher Nota (1-5);
+:Escrever Comentário;
+|#Cyan|[Sistema]|
+:Publicar Avaliação;
+:Atualizar Reputação do Asset;
+stop
+@enduml

@@ -1,0 +1,42 @@
+@startuml ComprarAsset
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Comprador]|
+start
+:Realizar Login <$rake>;
+:Selecionar Asset para compra;
+:Asset; <<task>>
+|#Cyan|[Sistema]|
+:Verificar Disponibilidade;
+if (Disponível?) then (Sim)
+    |#white|[Comprador]|
+    :Selecionar Método de Pagamento;
+    |#Cyan|[Sistema]|
+else (Não)
+    :Notificar "Indisponível";
+    stop
+endif
+|#white|[Comprador]|
+:Confirmar Compra;
+|#Cyan|[Sistema]|
+:Processar Pagamento;
+:Pagamento; <<task>>
+if (Pagamento aprovado?) then (Sim)
+    :Gerar Licença;
+    :Licença; <<task>>
+    :Entregar Asset;
+    :Notificar "Compra concluída";
+else (Não)
+    :Notificar "Falha no pagamento";
+endif
+stop
+@enduml

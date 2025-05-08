@@ -1,0 +1,27 @@
+@startuml OcultarAssetMarketplace
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Vendedor]|
+start
+:Realizar Login <$rake>;
+:Selecionar "Meus Assets";
+|#Cyan|[Sistema]|
+:Assets; <<task>>
+
+|#white|[Vendedor]|
+:Selecionar Asset para Ocultar;
+:Asset; <<task>>
+:Confirmar Ocultação;
+|#Cyan|[Sistema]|
+:Atualizar Status de Visibilidade;
+stop
+@enduml

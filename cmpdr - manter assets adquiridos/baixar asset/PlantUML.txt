@@ -1,0 +1,29 @@
+@startuml BaixarAsset
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Comprador]|
+start
+:Realizar Login <$rake>;
+:Selecionar Asset da Biblioteca;
+:Asset; <<task>>
+|#Cyan|[Sistema]|
+:Verificar Licença;
+if (Licença válida?) then (Sim)
+    :Gerar Link de Download;
+    :LinkDownload; <<task>>
+    |#white|[Comprador]|
+    :Baixar Asset;
+else (Não)
+    :Notificar "Licença expirada";
+endif
+stop
+@enduml

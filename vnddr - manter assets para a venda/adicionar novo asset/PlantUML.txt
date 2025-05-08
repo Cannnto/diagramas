@@ -1,0 +1,41 @@
+@startuml AdicionarAssetVenda
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Vendedor]|
+start
+:Realizar Login <$rake>;
+:Selecionar "Adicionar Asset";
+|#Cyan|[Sistema]|
+:Exibir Formulário de Cadastro;
+:FormularioAsset; <<task>>
+
+|#white|[Vendedor]|
+fork
+    :Upload do Arquivo;
+    :ArquivoAsset; <<task>>
+fork again
+    :Inserir Título/Descrição;
+    :DetalhesAsset; <<task>>
+fork again
+    :Definir Preço;
+    :Preco; <<task>>
+end fork
+
+|#Cyan|[Sistema]|
+:Validar Dados;
+if (Válido?) then (Sim)
+    :Publicar Asset;
+else (Não)
+    :Solicitar Correções;
+endif
+stop
+@enduml

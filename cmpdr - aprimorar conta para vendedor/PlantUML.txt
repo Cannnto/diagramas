@@ -1,0 +1,42 @@
+@startuml AprimorarContaParaVendedor
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Comprador]|
+start
+:Realizar Login <$rake>;
+:Acessar "Aprimorar Conta";
+|#Cyan|[Sistema]|
+:Exibir Formulário de Upgrade;
+:DadosRequeridos; <<task>>
+
+|#white|[Comprador]|
+fork
+    :Inserir Dados Bancários;
+    :ContaBancaria; <<task>>
+fork again
+    :Enviar Documento de Identidade;
+    :DocumentoID; <<task>>
+fork again
+    :Aceitar Termos de Vendedor;
+    :TermosServico; <<task>>
+end fork
+
+|#Cyan|[Sistema]|
+:Validar Dados;
+if (Dados completos e válidos?) then (Sim)
+    :Processar Upgrade;
+else (Não)
+    :Dados incorretos;
+endif
+
+stop
+@enduml

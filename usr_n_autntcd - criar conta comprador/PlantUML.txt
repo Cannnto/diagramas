@@ -1,0 +1,54 @@
+@startuml CriarContaComprador
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Usuário Não Autenticado]|
+start
+:Acessar Página de Cadastro;
+|#Cyan|[Sistema]|
+:Exibir Formulário de Registro;
+:FormularioCadastro; <<task>>
+
+|#white|[Usuário Não Autenticado]|
+fork
+    :Inserir Email;
+    :Email; <<task>>
+fork again
+    :Criar Senha;
+    :Senha; <<task>>
+fork again
+    :Informar Nome Completo;
+    :Nome; <<task>>
+end fork
+
+|#Cyan|[Sistema]|
+:Validar Dados;
+if (Dados válidos?) then (Sim)
+    :Verificar Email Existente;
+    if (Email único?) then (Sim)
+        :Criar Conta;
+        :ContaComprador; <<task>>
+        :Enviar Email de Confirmação;
+        :EmailConfirmacao; <<task>>
+        |#white|[Usuário Não Autenticado]|
+        :Confirmar Email;
+        |#Cyan|[Sistema]|
+        :Ativar Conta;
+        :Notificar "Conta criada com sucesso!";
+    else (Não)
+        :Notificar "Email já cadastrado";
+    endif
+else (Não)
+    :Notificar "Dados inválidos";
+endif
+
+stop
+@enduml

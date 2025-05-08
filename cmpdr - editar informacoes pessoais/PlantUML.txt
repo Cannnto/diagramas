@@ -1,0 +1,39 @@
+@startuml EditarInformacoesPessoais
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}
+
+|#white|[Comprador]|
+start
+:Realizar Login <$rake>;
+:Acessar Perfil;
+|#Cyan|[Sistema]|
+:Perfil; <<task>>
+|#white|[Comprador]|
+:Selecionar Campo para Edição;
+fork
+    :Editar Nome;
+    :Nome; <<task>>
+fork again
+    :Editar Email;
+    :Email; <<task>>
+fork again
+    :Editar Senha;
+    :Senha; <<task>>
+end fork
+|#Cyan|[Sistema]|
+:Validar Dados;
+if (Dados válidos?) then (Sim)
+    :Atualizar Perfil;
+else (Não)
+    :Notificar "Erro na validação";
+endif
+stop
+@enduml

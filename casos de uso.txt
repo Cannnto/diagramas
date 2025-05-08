@@ -22,6 +22,6 @@ left to right direction
 
 'includes and extends
     (comprar assets) <.. (avaliar produto) :<<extends>>
-    (manter assets adquiridos) <.. (vizualizar detalhes de produto) :<<extends>>
+    (manter assets adquiridos) <.. (vizualizar detalhes) :<<extends>>
     (pagar) .up.> (comprar assets): <<include>>
 @enduml
