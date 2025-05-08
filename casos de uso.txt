@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+
+:vendedor: -right-|> :comprador:
+
+'usuario
+:usuario não autenticado:-->(criar conta de comprador)
+
+'comprador
+:comprador:-->(comprar assets)
+:comprador:-->(manter lista de desejos)
+:comprador:-->(enviar mensagens)
+:comprador:-->(editar informações pessoasis)
+:comprador:-->(aprimorar conta para vendedor)
+:comprador:-->(manter assets adquiridos)
+
+'vendedor
+:vendedor: --> (manter assets para venda)
+
+'cartão
+:cartao:-up-(pagar)
+
+'includes and extends
+    (comprar assets) <.. (avaliar produto) :<<extends>>
+    (manter assets adquiridos) <.. (vizualizar detalhes de produto) :<<extends>>
+    (pagar) .up.> (comprar assets): <<include>>
+@enduml
